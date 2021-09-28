@@ -25,13 +25,19 @@ if (mm < 10) {
 
 dateInput.max = `${yyyy}-${mm}-${dd}`;
 
+// Creating variables to hold months to add spelled out date to display
+let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+let month;
+let sepDay;
+let sepYear;
+
 // * FETCH *
 // Function that will fetch the picture or video from APOD
 async function fetchPicture(e) {
     e.preventDefault();
 
     date = document.getElementById('date').value; // Assigning that inputted date to the date variable
-    console.log(date);
+    // console.log(date);
     fullURL = `${baseURL}${date}`;
 
     const response = await fetch(fullURL);
@@ -43,7 +49,24 @@ async function fetchPicture(e) {
 function displayPicture(data) {
     console.log(data);
 
+    // Splitting date into an array in order to display date of post
+    let sepDate = date.split('-');
+    console.log(sepDate);
+    let sepMonth = sepDate[1].slice(1);
+    month = months[sepMonth-1];
+    sepDay = sepDate[2];
+    console.log(sepDay);
+    sepYear = sepDate[0];
+    console.log(sepYear);
+
+    // Cutting off the 0 if the day is less than 10
+    if (sepDay.startsWith('0')) {
+        sepDay = sepDay.slice(1);
+        console.log(sepDay);
+    }
+
     let title = document.createElement('h3');
+    let dateOfPic = document.createElement('h4');
     let description = document.createElement('p');
     let media;
 
