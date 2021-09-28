@@ -14,7 +14,6 @@ let dateInput = document.querySelector('#date');
 let currentDate = new Date();
 let dd = currentDate.getDate();
 let mm = currentDate.getMonth() + 1;
-console.log(mm);
 let yyyy = currentDate.getFullYear();
 
 if (dd < 10) {
@@ -24,10 +23,7 @@ if (mm < 10) {
     mm = '0' + mm;
 }
 
-let maxDate = `${yyyy}-${mm}-${dd}`;
-console.log(maxDate);
-
-// dateInput.max = ;
+dateInput.max = `${yyyy}-${mm}-${dd}`;
 
 // * FETCH *
 // Function that will fetch the picture or video from APOD
