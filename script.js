@@ -43,7 +43,24 @@ async function fetchPicture(e) {
 function displayPicture(data) {
     console.log(data);
 
-    // let title = document.createElement('h3');
-    // let description = document.createElement('p');
-    // let
+    let title = document.createElement('h3');
+    let description = document.createElement('p');
+    let media;
+
+    // * FINISH TOMORROW
+    /* 
+        - create iframe and img css/maybe add id to a single div and edit it the same?
+        - edit innerText of title & description
+        - edit src of media
+        - add any css that needs to appear on fetch
+        - append all elements appropriately
+        - add loop to remove current elements on new search
+    */
+    if (data.media_type === "video") { // attach ratio class to div
+        let mediaDiv = document.createElement('div');
+        media = document.createElement('iframe');
+    } else {
+        media = document.createElement('img');
+    }
+
 }
