@@ -49,6 +49,10 @@ async function fetchPicture(e) {
 function displayPicture(data) {
     console.log(data);
 
+    while(resultsDiv.firstChild) {
+        resultsDiv.removeChild(resultsDiv.lastChild);
+    }
+
     // Splitting date into an array in order to display date of post
     let sepDate = date.split('-');
     let sepMonth = sepDate[1].slice(1);
@@ -61,41 +65,47 @@ function displayPicture(data) {
         sepDay = sepDay.slice(1);
     }
 
+    // Creating all the elements
     let title = document.createElement('h3');
     let dateOfPic = document.createElement('h4');
     let description = document.createElement('p');
     let mediaDiv = document.createElement('div');
+    let descripDiv = document.createElement('div');
+    descripDiv.style.width = '800px'
+    descripDiv.setAttribute('class', 'd-block mx-auto');
     let media;
 
+    // Setting up code depending on if media type is video or img/gif
     if (data.media_type === "video") { // attach ratio class to div
         media = document.createElement('iframe');
-        mediaDiv.setAttribute('class', 'ratio ratio-16x9');
+        media.src = `${data.url}?autoplay=1`;
+        media.setAttribute('class', 'mx-auto d-block');
+        mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
+        mediaDiv.style.width = '960px';
     } else {
         media = document.createElement('img');
-        media.setAttribute('class', 'img-fluid');
+        media.src = data.url;
+        media.setAttribute('class', 'img-fluid mx-auto d-block mw-100 mh-100');
+        // media.style = "max-width: 900px; max-height: 900px"
+        mediaDiv.setAttribute('class', 'ms-auto me-auto');
+        mediaDiv.style = "width: 900px; height: 900px";
     }
 
+    // Inserting data into elements and styling
     title.innerText = data.title;
-    title.setAttribute('class', 'text-light');
+    title.setAttribute('class', 'text-light text-center display-5');
     dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
-    dateOfPic.setAttribute('class', 'text-light');
-    media.src = data.url;
+    dateOfPic.setAttribute('class', 'text-light text-center fs-4');
     description.innerText = data.explanation;
-    description.setAttribute('class', 'text-light');
+    description.setAttribute('class', 'text-light fs-5');
+    description.style.textIndent = '2em';
+    resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
+    // Appending everything to the div in the HTML doc
     resultsDiv.appendChild(title);
     resultsDiv.appendChild(dateOfPic);
     resultsDiv.appendChild(mediaDiv);
+    resultsDiv.appendChild(descripDiv);
     mediaDiv.appendChild(media);
-    resultsDiv.appendChild(description);
+    descripDiv.appendChild(description);
 }
-
-// * FINISH TOMORROW
-    /* 
-        - create iframe and img css/maybe add id to a single div and edit it the same?
-        - edit innerText of title & description
-        - edit src of media
-        - add any css that needs to appear on fetch
-        - append all elements appropriately
-        - add loop to remove current elements on new search
-    */
