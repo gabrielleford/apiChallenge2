@@ -86,8 +86,7 @@ function displayPicture(data) {
         media = document.createElement('img');
         media.src = data.url;
         media.setAttribute('class', 'img-fluid mx-auto d-block mw-100 mh-100');
-        // media.style = "max-width: 900px; max-height: 900px"
-        mediaDiv.setAttribute('class', 'ms-auto me-auto');
+        mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
         mediaDiv.style = "width: 900px; height: 900px";
     }
 
