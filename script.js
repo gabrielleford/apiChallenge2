@@ -69,16 +69,17 @@ function displayPicture(data) {
 
     if (data.media_type === "video") { // attach ratio class to div
         media = document.createElement('iframe');
+        media.src = `${data.url}?autoplay=1`
         mediaDiv.setAttribute('class', 'ratio ratio-16x9');
     } else {
         media = document.createElement('img');
+        media.src = data.url;
         media.setAttribute('class', 'img-fluid');
     }
 
     title.innerText = data.title;
     dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
     description.innerText = data.explanation;
-    media.src = data.url;
     console.log(title);
     console.log(dateOfPic);
     console.log(description);
