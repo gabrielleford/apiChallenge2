@@ -116,12 +116,12 @@ function displayPicture(data) {
         mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
         mediaDiv.style.width = '960px';
         // Appending everything to the div in the HTML doc
+        mediaDiv.appendChild(media);
+        descripDiv.appendChild(description);
         resultsDiv.appendChild(title);
         resultsDiv.appendChild(dateOfPic);
         resultsDiv.appendChild(mediaDiv);
         resultsDiv.appendChild(descripDiv);
-        mediaDiv.appendChild(media);
-        descripDiv.appendChild(description);
     } else {
         media = document.createElement('img');
         media.src = data.url;
@@ -129,11 +129,11 @@ function displayPicture(data) {
         mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
         mediaDiv.style = "width: 900px; height: 900px";
         // Appending everything to the div in the HTML doc
+        mediaDiv.appendChild(media);
+        mediaDiv.appendChild(description);
         resultsDiv.appendChild(title);
         resultsDiv.appendChild(dateOfPic);
         resultsDiv.appendChild(mediaDiv);
-        mediaDiv.appendChild(media);
-        mediaDiv.appendChild(description);
     }
 }
 
@@ -188,6 +188,7 @@ function displayRandom(randData) {
     }
     description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
+    resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
 
     // Setting up code depending on if media type is video or img/gif
@@ -198,12 +199,12 @@ function displayRandom(randData) {
         mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
         mediaDiv.style.width = '960px';
         // Appending everything to the div in the HTML doc
+        mediaDiv.appendChild(media);
+        descripDiv.appendChild(description);
         resultsDiv.appendChild(title);
         resultsDiv.appendChild(dateOfPic);
         resultsDiv.appendChild(mediaDiv);
         resultsDiv.appendChild(descripDiv);
-        mediaDiv.appendChild(media);
-        descripDiv.appendChild(description);
     } else {
         media = document.createElement('img');
         media.src = rData.url;
@@ -211,12 +212,10 @@ function displayRandom(randData) {
         mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
         mediaDiv.style = "width: 900px; height: 900px";
         // Appending everything to the div in the HTML doc
+        mediaDiv.appendChild(media);
+        mediaDiv.appendChild(description);
         resultsDiv.appendChild(title);
         resultsDiv.appendChild(dateOfPic);
         resultsDiv.appendChild(mediaDiv);
-        mediaDiv.appendChild(media);
-        mediaDiv.appendChild(description);
     }
-
-    resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 }
