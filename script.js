@@ -51,26 +51,44 @@ function displayPicture(data) {
 
     // Splitting date into an array in order to display date of post
     let sepDate = date.split('-');
-    console.log(sepDate);
     let sepMonth = sepDate[1].slice(1);
     month = months[sepMonth-1];
     sepDay = sepDate[2];
-    console.log(sepDay);
     sepYear = sepDate[0];
-    console.log(sepYear);
 
     // Cutting off the 0 if the day is less than 10
     if (sepDay.startsWith('0')) {
         sepDay = sepDay.slice(1);
-        console.log(sepDay);
     }
 
     let title = document.createElement('h3');
     let dateOfPic = document.createElement('h4');
     let description = document.createElement('p');
+    let mediaDiv = document.createElement('div');
     let media;
 
-    // * FINISH TOMORROW
+    if (data.media_type === "video") { // attach ratio class to div
+        media = document.createElement('iframe');
+        mediaDiv.setAttribute('class', 'ratio ratio-16x9');
+    } else {
+        media = document.createElement('img');
+        media.setAttribute('class', 'img-fluid');
+    }
+
+    title.innerText = data.title;
+    dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
+    description.innerText = data.explanation;
+    media.src = data.url;
+    console.log(title);
+    console.log(dateOfPic);
+    console.log(description);
+    console.log(media);
+    console.log(mediaDiv);
+
+
+}
+
+// * FINISH TOMORROW
     /* 
         - create iframe and img css/maybe add id to a single div and edit it the same?
         - edit innerText of title & description
@@ -79,11 +97,3 @@ function displayPicture(data) {
         - append all elements appropriately
         - add loop to remove current elements on new search
     */
-    if (data.media_type === "video") { // attach ratio class to div
-        let mediaDiv = document.createElement('div');
-        media = document.createElement('iframe');
-    } else {
-        media = document.createElement('img');
-    }
-
-}
