@@ -9,14 +9,19 @@ search.addEventListener('submit', fetchPicture);
 
 // Setting the max date allowed to current day
 let dateInput = document.querySelector('#date');
-let test = new Date()
-let testDay = test.getDate();
-console.log(testDay);
-let testMonth = test.getMonth();
-console.log(testMonth);
-let testYear = test.getFullYear();
-console.log(testYear);
-dateInput.max = new Date().toISOString().split('T')[0];
+let currentDate = new Date();
+let dd = currentDate.getDate();
+let mm = currentDate.getMonth();
+let yyyy = currentDate.getFullYear();
+
+if (dd < 10) {
+    dd = '0' + dd;
+}
+if (mm < 10) {
+    mm = '0' + mm;
+}
+
+dateInput.max = `${yyyy}-${mm}-${dd}`;
 
 // * FETCH *
 // Function that will fetch the picture or video from APOD
