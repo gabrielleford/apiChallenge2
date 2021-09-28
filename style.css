@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url(./assets/PoppinsLight.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Libre Franklin';
+    src: url(./assets/LibreFranklinVariableFontwght.ttf) format('truetype');
+    font-weight: 1 999;
+}
+
+body {
+    background-image: url('./assets/nasaWallpaper.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#mainHeader, #description {
+    font-family: 'Poppins';
+}
