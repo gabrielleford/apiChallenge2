@@ -8,6 +8,8 @@ let resultsDiv = document.getElementById('results');
 let search = document.querySelector('form');
 let date;
 search.addEventListener('submit', fetchPicture);
+let random = document.getElementById('random');
+random.addEventListener('click', randPicture);
 
 // Setting the max date allowed to current day
 let dateInput = document.querySelector('#date');
@@ -45,6 +47,10 @@ async function fetchPicture(e) {
     displayPicture(json);
 }
 
+async function randPicture() {
+    console.log('hello');
+}
+
 // * DISPLAY *
 function displayPicture(data) {
     console.log(data);
@@ -70,9 +76,6 @@ function displayPicture(data) {
     let dateOfPic = document.createElement('h4');
     let description = document.createElement('p');
     let mediaDiv = document.createElement('div');
-    let descripDiv = document.createElement('div');
-    descripDiv.style.width = '800px'
-    descripDiv.setAttribute('class', 'd-block mx-auto');
     let media;
 
     // Setting up code depending on if media type is video or img/gif
@@ -85,7 +88,7 @@ function displayPicture(data) {
     } else {
         media = document.createElement('img');
         media.src = data.url;
-        media.setAttribute('class', 'img-fluid mx-auto d-block mw-100 mh-100');
+        media.setAttribute('class', 'img-fluid mx-auto d-block h-75');
         mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
         mediaDiv.style = "width: 900px; height: 900px";
     }
@@ -96,7 +99,7 @@ function displayPicture(data) {
     dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
     dateOfPic.setAttribute('class', 'text-light text-center fs-4');
     description.innerText = data.explanation;
-    description.setAttribute('class', 'text-light fs-5');
+    description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
     resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
@@ -104,7 +107,6 @@ function displayPicture(data) {
     resultsDiv.appendChild(title);
     resultsDiv.appendChild(dateOfPic);
     resultsDiv.appendChild(mediaDiv);
-    resultsDiv.appendChild(descripDiv);
     mediaDiv.appendChild(media);
-    descripDiv.appendChild(description);
+    mediaDiv.appendChild(description);
 }
