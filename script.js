@@ -208,9 +208,8 @@ function displayRandom(randData) {
     } else {
         media = document.createElement('img');
         media.src = rData.url;
-        media.setAttribute('class', 'img-fluid mx-auto d-block h-75');
-        mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
-        mediaDiv.style = "width: 900px; height: 900px";
+        media.setAttribute('class', 'img-fluid mx-auto d-block');
+        mediaDiv.setAttribute('class', 'col ms-auto me-auto pt-3');
         // Appending everything to the div in the HTML doc
         mediaDiv.appendChild(media);
         mediaDiv.appendChild(description);
@@ -219,3 +218,6 @@ function displayRandom(randData) {
         resultsDiv.appendChild(mediaDiv);
     }
 }
+
+// Figure out how to embed this properly
+// https://apod.nasa.gov/apod/image/1803/AstroSoM/hudf.html
