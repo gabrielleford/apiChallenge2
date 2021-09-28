@@ -9,6 +9,13 @@ search.addEventListener('submit', fetchPicture);
 
 // Setting the max date allowed to current day
 let dateInput = document.querySelector('#date');
+let test = new Date()
+let testDay = test.getDate();
+console.log(testDay);
+let testMonth = test.getMonth();
+console.log(testMonth);
+let testYear = test.getFullYear();
+console.log(testYear);
 dateInput.max = new Date().toISOString().split('T')[0];
 
 // * FETCH *
