@@ -2,6 +2,8 @@
 let baseURL = 'https://api.nasa.gov/planetary/apod?api_key=xLBmSdVETcqUsOAY73zIXHUCrkUv1yxvFaRlLRjU&date=';
 let fullURL;
 
+let resultsDiv = document.getElementById('results');
+
 // Grabbing form for event listener and creating a date variable
 let search = document.querySelector('form');
 let date;
@@ -11,7 +13,8 @@ search.addEventListener('submit', fetchPicture);
 let dateInput = document.querySelector('#date');
 let currentDate = new Date();
 let dd = currentDate.getDate();
-let mm = currentDate.getMonth();
+let mm = currentDate.getMonth() + 1;
+console.log(mm);
 let yyyy = currentDate.getFullYear();
 
 if (dd < 10) {
@@ -21,7 +24,10 @@ if (mm < 10) {
     mm = '0' + mm;
 }
 
-dateInput.max = `${yyyy}-${mm}-${dd}`;
+let maxDate = `${yyyy}-${mm}-${dd}`;
+console.log(maxDate);
+
+// dateInput.max = ;
 
 // * FETCH *
 // Function that will fetch the picture or video from APOD
@@ -40,4 +46,8 @@ async function fetchPicture(e) {
 // * DISPLAY *
 function displayPicture(data) {
     console.log(data);
+
+    // let title = document.createElement('h3');
+    // let description = document.createElement('p');
+    // let
 }
