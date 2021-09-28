@@ -69,24 +69,25 @@ function displayPicture(data) {
 
     if (data.media_type === "video") { // attach ratio class to div
         media = document.createElement('iframe');
-        media.src = `${data.url}?autoplay=1`
         mediaDiv.setAttribute('class', 'ratio ratio-16x9');
     } else {
         media = document.createElement('img');
-        media.src = data.url;
         media.setAttribute('class', 'img-fluid');
     }
 
     title.innerText = data.title;
+    title.setAttribute('class', 'text-light');
     dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
+    dateOfPic.setAttribute('class', 'text-light');
+    media.src = data.url;
     description.innerText = data.explanation;
-    console.log(title);
-    console.log(dateOfPic);
-    console.log(description);
-    console.log(media);
-    console.log(mediaDiv);
+    description.setAttribute('class', 'text-light');
 
-
+    resultsDiv.appendChild(title);
+    resultsDiv.appendChild(dateOfPic);
+    resultsDiv.appendChild(mediaDiv);
+    mediaDiv.appendChild(media);
+    resultsDiv.appendChild(description);
 }
 
 // * FINISH TOMORROW
