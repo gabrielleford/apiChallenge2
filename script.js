@@ -47,14 +47,18 @@ async function fetchPicture(e) {
     displayPicture(json);
 }
 
+// * Random Fetch *
+// Function that will fetch a random picture or video from APOD
 async function randPicture() {
-    console.log('hello');
+    fullURL = `${baseURL}&count=1`;
+
+    const resp = await fetch(fullURL);
+    const rJson = await resp.json();
+    displayRandom(rJson);
 }
 
 // * DISPLAY *
 function displayPicture(data) {
-    console.log(data);
-
     while(resultsDiv.firstChild) {
         resultsDiv.removeChild(resultsDiv.lastChild);
     }
@@ -62,9 +66,100 @@ function displayPicture(data) {
     // Splitting date into an array in order to display date of post
     let sepDate = date.split('-');
     let sepMonth = sepDate[1].slice(1);
-    month = months[sepMonth-1];
+    console.log(sepMonth);
     sepDay = sepDate[2];
     sepYear = sepDate[0];
+
+    // Need to account for October
+    if (sepMonth == 0) {
+        month = months[9];
+    } else {
+        month = months[sepMonth-1];
+    }
+    
+
+    // Cutting off the 0 if the day is less than 10
+    if (sepDay.startsWith('0')) {
+        sepDay = sepDay.slice(1);
+        console.log
+    }
+
+    // Creating all the elements
+    let title = document.createElement('h3');
+    let dateOfPic = document.createElement('h4');
+    let description = document.createElement('p');
+    let mediaDiv = document.createElement('div');
+    let descripDiv = document.createElement('div');
+    let media;
+
+    // Inserting data into elements and styling
+    title.innerText = data.title;
+    title.setAttribute('class', 'text-light text-center display-5');
+    dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
+    dateOfPic.setAttribute('class', 'text-light text-center fs-4');
+
+    // Adding copyright information
+    if (rData.copyright) {
+        description.innerHTML = `${rData.explanation} <br><br> <small>Copyright: ${rData.copyright}<small>`;
+    } else {
+        description.innerText = rData.explanation;
+    }
+    description.setAttribute('class', 'text-light fs-5 pt-3');
+    description.style.textIndent = '2em';
+    resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
+
+    // Setting up code depending on if media type is video or img/gif
+    if (data.media_type === "video") { // attach ratio class to div
+        media = document.createElement('iframe');
+        media.src = `${data.url}?autoplay=1`;
+        media.setAttribute('class', 'mx-auto d-block');
+        mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
+        mediaDiv.style.width = '960px';
+        // Appending everything to the div in the HTML doc
+        resultsDiv.appendChild(title);
+        resultsDiv.appendChild(dateOfPic);
+        resultsDiv.appendChild(mediaDiv);
+        resultsDiv.appendChild(descripDiv);
+        mediaDiv.appendChild(media);
+        descripDiv.appendChild(description);
+    } else {
+        media = document.createElement('img');
+        media.src = data.url;
+        media.setAttribute('class', 'img-fluid mx-auto d-block h-75');
+        mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
+        mediaDiv.style = "width: 900px; height: 900px";
+        // Appending everything to the div in the HTML doc
+        resultsDiv.appendChild(title);
+        resultsDiv.appendChild(dateOfPic);
+        resultsDiv.appendChild(mediaDiv);
+        mediaDiv.appendChild(media);
+        mediaDiv.appendChild(description);
+    }
+}
+
+// * Random Display *
+function displayRandom(randData) {
+    while(resultsDiv.firstChild) {
+        resultsDiv.removeChild(resultsDiv.lastChild);
+    }
+    
+    console.log(randData[0]);
+
+    rData = randData[0];
+    date = rData.date;
+
+    // Splitting date into an array in order to display date of post
+    let sepDate = date.split('-');
+    let sepMonth = sepDate[1].slice(1);
+    sepDay = sepDate[2];
+    sepYear = sepDate[0];
+
+    // Need to account for October
+    if (sepMonth == 0) {
+        month = months[9];
+    } else {
+        month = months[sepMonth-1];
+    }
 
     // Cutting off the 0 if the day is less than 10
     if (sepDay.startsWith('0')) {
@@ -76,37 +171,52 @@ function displayPicture(data) {
     let dateOfPic = document.createElement('h4');
     let description = document.createElement('p');
     let mediaDiv = document.createElement('div');
+    let descripDiv = document.createElement('div');
     let media;
 
-    // Setting up code depending on if media type is video or img/gif
-    if (data.media_type === "video") { // attach ratio class to div
-        media = document.createElement('iframe');
-        media.src = `${data.url}?autoplay=1`;
-        media.setAttribute('class', 'mx-auto d-block');
-        mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
-        mediaDiv.style.width = '960px';
-    } else {
-        media = document.createElement('img');
-        media.src = data.url;
-        media.setAttribute('class', 'img-fluid mx-auto d-block h-75');
-        mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
-        mediaDiv.style = "width: 900px; height: 900px";
-    }
-
     // Inserting data into elements and styling
-    title.innerText = data.title;
+    title.innerText = rData.title;
     title.setAttribute('class', 'text-light text-center display-5');
     dateOfPic.innerText = `${month} ${sepDay}, ${sepYear}`;
     dateOfPic.setAttribute('class', 'text-light text-center fs-4');
-    description.innerText = data.explanation;
+
+    // Adding copyright information
+    if (rData.copyright) {
+        description.innerHTML = `${rData.explanation} <br><br> <small>Copyright: ${rData.copyright}<small>`;
+    } else {
+        description.innerText = rData.explanation;
+    }
     description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
-    resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
-    // Appending everything to the div in the HTML doc
-    resultsDiv.appendChild(title);
-    resultsDiv.appendChild(dateOfPic);
-    resultsDiv.appendChild(mediaDiv);
-    mediaDiv.appendChild(media);
-    mediaDiv.appendChild(description);
+
+    // Setting up code depending on if media type is video or img/gif
+    if (rData.media_type === "video") { // attach ratio class to div
+        media = document.createElement('iframe');
+        media.src = `${rData.url}?autoplay=1`;
+        media.setAttribute('class', 'mx-auto d-block');
+        mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
+        mediaDiv.style.width = '960px';
+        // Appending everything to the div in the HTML doc
+        resultsDiv.appendChild(title);
+        resultsDiv.appendChild(dateOfPic);
+        resultsDiv.appendChild(mediaDiv);
+        resultsDiv.appendChild(descripDiv);
+        mediaDiv.appendChild(media);
+        descripDiv.appendChild(description);
+    } else {
+        media = document.createElement('img');
+        media.src = rData.url;
+        media.setAttribute('class', 'img-fluid mx-auto d-block h-75');
+        mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
+        mediaDiv.style = "width: 900px; height: 900px";
+        // Appending everything to the div in the HTML doc
+        resultsDiv.appendChild(title);
+        resultsDiv.appendChild(dateOfPic);
+        resultsDiv.appendChild(mediaDiv);
+        mediaDiv.appendChild(media);
+        mediaDiv.appendChild(description);
+    }
+
+    resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 }
