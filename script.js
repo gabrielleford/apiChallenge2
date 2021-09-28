@@ -11,6 +11,7 @@ search.addEventListener('submit', fetchPicture);
 let dateInput = document.querySelector('#date');
 dateInput.max = new Date().toISOString().split('T')[0];
 
+// * FETCH *
 // Function that will fetch the picture or video from APOD
 async function fetchPicture(e) {
     e.preventDefault();
@@ -21,6 +22,10 @@ async function fetchPicture(e) {
 
     const response = await fetch(fullURL);
     const json = await response.json();
-    console.log(json);
+    displayPicture(json);
 }
 
+// * DISPLAY *
+function displayPicture(data) {
+    console.log(data);
+}
