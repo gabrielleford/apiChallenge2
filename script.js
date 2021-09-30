@@ -99,13 +99,15 @@ function displayPicture(data) {
     dateOfPic.setAttribute('class', 'text-light text-center fs-4');
 
     // Adding copyright information
-    if (rData.copyright) {
-        description.innerHTML = `${rData.explanation} <br><br> <small>Copyright: ${rData.copyright}<small>`;
+    if (data.copyright) {
+        description.innerHTML = `${data.explanation} <br><br> <small>Copyright: ${data.copyright}<small>`;
     } else {
-        description.innerText = rData.explanation;
+        description.innerText = data.explanation;
     }
     description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
+    descripDiv.setAttribute('class', 'ms-auto me-auto');
+    descripDiv.style.width = '800px';
     resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
     // Setting up code depending on if media type is video or img/gif
@@ -127,13 +129,13 @@ function displayPicture(data) {
         media.src = data.url;
         media.setAttribute('class', 'img-fluid mx-auto d-block h-75');
         mediaDiv.setAttribute('class', 'ms-auto me-auto pt-3');
-        mediaDiv.style = "width: 900px; height: 900px";
         // Appending everything to the div in the HTML doc
         mediaDiv.appendChild(media);
-        mediaDiv.appendChild(description);
+        descripDiv.appendChild(description);
         resultsDiv.appendChild(title);
         resultsDiv.appendChild(dateOfPic);
         resultsDiv.appendChild(mediaDiv);
+        mediaDiv.appendChild(descripDiv);
     }
 }
 
@@ -188,6 +190,8 @@ function displayRandom(randData) {
     }
     description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
+    descripDiv.setAttribute('class', 'ms-auto me-auto');
+    descripDiv.style.width = '800px';
     resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
 
@@ -212,10 +216,11 @@ function displayRandom(randData) {
         mediaDiv.setAttribute('class', 'col ms-auto me-auto pt-3');
         // Appending everything to the div in the HTML doc
         mediaDiv.appendChild(media);
-        mediaDiv.appendChild(description);
+        descripDiv.appendChild(description);
         resultsDiv.appendChild(title);
         resultsDiv.appendChild(dateOfPic);
         resultsDiv.appendChild(mediaDiv);
+        mediaDiv.appendChild(descripDiv);
     }
 }
 
