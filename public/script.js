@@ -65,23 +65,16 @@ function displayPicture(data) {
 
     // Splitting date into an array in order to display date of post
     let sepDate = date.split('-');
-    let sepMonth = sepDate[1].slice(1);
-    console.log(sepMonth);
-    sepDay = sepDate[2];
-    sepYear = sepDate[0];
-
-    // Need to account for October
-    if (sepMonth == 0) {
-        month = months[9];
-    } else {
-        month = months[sepMonth-1];
+    let [sepYear, sepMonth, sepDay] = sepDate;
+    if (sepMonth.startsWith('0')) {
+        sepMonth = sepMonth.slice(1);
     }
-    
 
+    month = months[sepMonth - 1];
+    
     // Cutting off the 0 if the day is less than 10
     if (sepDay.startsWith('0')) {
         sepDay = sepDay.slice(1);
-        console.log
     }
 
     // Creating all the elements
@@ -151,21 +144,13 @@ function displayRandom(randData) {
     date = rData.date;
 
     // Splitting date into an array in order to display date of post
-    console.log(date);
     let sepDate = date.split('-');
-    console.log(sepDate);
     let [sepYear, sepMonth, sepDay] = sepDate;
-    console.log(sepMonth, sepDay, sepYear);
-    // let sepMonth = sepDate[1].slice(1);
-    sepDay = sepDate[2];
-    sepYear = sepDate[0];
-
-    // Need to account for October
-    if (sepMonth == 0) {
-        month = months[9];
-    } else {
-        month = months[sepMonth-1];
+    if (sepMonth.startsWith('0')) {
+        sepMonth = sepMonth.slice(1);
     }
+
+    month = months[sepMonth - 1];
 
     // Cutting off the 0 if the day is less than 10
     if (sepDay.startsWith('0')) {
