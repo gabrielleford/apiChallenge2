@@ -106,7 +106,7 @@ function displayPicture(data) {
     // Setting up code depending on if media type is video or img/gif
     if (data.media_type === "video") { // attach ratio class to div
         media = document.createElement('iframe');
-        media.src = `${data.url}?autoplay=1`;
+        media.src = data.url;
         media.setAttribute('class', 'mx-auto d-block');
         mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
         mediaDiv.style.width = '960px';
@@ -187,7 +187,7 @@ function displayRandom(randData) {
     // Setting up code depending on if media type is video or img/gif
     if (rData.media_type === "video") { // attach ratio class to div
         media = document.createElement('iframe');
-        media.src = `${rData.url}?autoplay=1`;
+        media.src = rData.url;
         media.setAttribute('class', 'mx-auto d-block');
         mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
         mediaDiv.style.width = '960px';
@@ -212,6 +212,3 @@ function displayRandom(randData) {
         mediaDiv.appendChild(descripDiv);
     }
 }
-
-// Figure out how to embed this properly
-// https://apod.nasa.gov/apod/image/1803/AstroSoM/hudf.html
