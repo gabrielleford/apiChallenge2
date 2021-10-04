@@ -109,7 +109,7 @@ function displayPicture(data) {
         media.src = data.url;
         media.setAttribute('class', 'mx-auto d-block');
         mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
-        mediaDiv.style.width = '960px';
+        mediaDiv.style.maxWidth = '960px';
         // Appending everything to the div in the HTML doc
         mediaDiv.appendChild(media);
         descripDiv.appendChild(description);
@@ -188,7 +188,7 @@ function displayRandom(randData) {
         media.src = rData.url;
         media.setAttribute('class', 'mx-auto d-block');
         mediaDiv.setAttribute('class', 'ratio ratio-16x9 ms-auto me-auto');
-        mediaDiv.style.width = '960px';
+        mediaDiv.style.maxWidth = '960px';
         // Appending everything to the div in the HTML doc
         mediaDiv.appendChild(media);
         descripDiv.appendChild(description);
