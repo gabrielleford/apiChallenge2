@@ -100,7 +100,7 @@ function displayPicture(data) {
     description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
     descripDiv.setAttribute('class', 'ms-auto me-auto');
-    descripDiv.style.width = '800px';
+    descripDiv.style.maxWidth = '800px';
     resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
     // Setting up code depending on if media type is video or img/gif
@@ -137,8 +137,6 @@ function displayRandom(randData) {
     while(resultsDiv.firstChild) {
         resultsDiv.removeChild(resultsDiv.lastChild);
     }
-    
-    console.log(randData[0]);
 
     rData = randData[0];
     date = rData.date;
@@ -180,7 +178,7 @@ function displayRandom(randData) {
     description.setAttribute('class', 'text-light fs-5 pt-3');
     description.style.textIndent = '2em';
     descripDiv.setAttribute('class', 'ms-auto me-auto');
-    descripDiv.style.width = '800px';
+    descripDiv.style.maxWidth = '800px';
     resultsDiv.style = "background-color: rgba(8, 7, 8, 0.85); border-radius: 10px;";
 
 
